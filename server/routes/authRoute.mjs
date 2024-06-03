@@ -1,6 +1,6 @@
 import express from "express";
-import AuthHandlers from "../handlers/authHandler.js";
-import userVerification from "../middlewares/authMiddleware.js";
+import AuthHandlers from "../handlers/authHandler.mjs";
+import userVerification from "../middlewares/authMiddleware.mjs";
 
 const { Signup, Login } = AuthHandlers;
 

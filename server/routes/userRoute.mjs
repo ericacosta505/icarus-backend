@@ -1,6 +1,6 @@
 import express from "express";
-import UserHandlers from "../handlers/userHandler.js";
-import userVerification from "../middlewares/authMiddleware.js";
+import UserHandlers from "../handlers/userHandler.mjs";
+import userVerification from "../middlewares/authMiddleware.mjs";
 
 const {
   updateProteinGoal,

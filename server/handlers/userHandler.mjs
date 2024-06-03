@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import User from "../models/user.mjs";
 
 const updateProteinGoal = async (req, res) => {
   const { proteinGoal } = req.body;
