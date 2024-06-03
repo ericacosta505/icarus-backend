@@ -25,10 +25,7 @@ mongoose
 
 app.use(cookieParser());
 
-app.use("/", () => {
-  authRoute;
-  console.log("welcome to icarus");
-});
+app.use("/", authRoute);
 app.use("/user", userRoute);
 
 const port = process.env.PORT || 4000;
