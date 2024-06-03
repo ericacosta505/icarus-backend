@@ -1,6 +1,6 @@
 import User from "../models/user.mjs";
 import createSecretToken from "../utilities/secretToken.mjs";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 
 const Signup = async (req, res, next) => {
   try {
@@ -34,7 +34,7 @@ const Login = async (req, res, next) => {
     if (!user) {
       return res.json({ message: "Incorrect password or email" });
     }
-    const auth = await bcrypt.compare(password, user.password);
+    const auth = await argon2.verify(user.password, password);
     if (!auth) {
       return res.json({ message: "Incorrect password or email" });
     }

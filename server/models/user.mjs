@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 
 const entrySchema = new mongoose.Schema({
   mealName: {
@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 12);
+    this.password = await argon2.hash(this.password);
   }
 });
 
