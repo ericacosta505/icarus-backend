@@ -33,14 +33,14 @@ const getProteinGoal = async (req, res) => {
 
 const addEntry = async (req, res) => {
   const user = req.user;
-  const { mealName, proteinAmount } = req.body;
+  const { mealName, proteinAmount, time } = req.body;
 
   if (!mealName || !proteinAmount) {
     return res.status(400).json({ message: "Missing information" });
   }
 
   try {
-    const newEntry = { mealName, proteinAmount, createdAt: Date.now() };
+    const newEntry = { mealName, proteinAmount, createdAt: time };
     user.entries.push(newEntry);
     await user.save();
     res.status(201).json(newEntry);
