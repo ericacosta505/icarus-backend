@@ -84,14 +84,23 @@ const getTodaysEntries = async (req, res) => {
 
 const sumTodaysEntries = async (req, res) => {
   const user = req.user;
+  const { time } = req.query;
 
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
-  const todayStart = new Date();
+  
+  const parsedTime = new Date(time);
+
+  console.log("Parsed time:", parsedTime);
+
+  const todayStart = new Date(parsedTime);
   todayStart.setHours(0, 0, 0, 0);
-  const todayEnd = new Date();
+  const todayEnd = new Date(parsedTime);
   todayEnd.setHours(23, 59, 59, 999);
+
+  console.log("Today's start time:", todayStart);
+  console.log("Today's end time:", todayEnd);
 
   const todaysEntries = user.entries.filter((entry) => {
     const entryDate = new Date(entry.createdAt);
