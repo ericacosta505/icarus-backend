@@ -54,13 +54,17 @@ const addEntry = async (req, res) => {
 
 const getTodaysEntries = async (req, res) => {
   const user = req.user;
+  const {time} = req.body
 
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
-  const todayStart = new Date();
+ 
+  const parsedTime = new Date(time);
+
+  const todayStart = new Date(parsedTime);
   todayStart.setHours(0, 0, 0, 0);
-  const todayEnd = new Date();
+  const todayEnd = new Date(parsedTime);
   todayEnd.setHours(23, 59, 59, 999);
 
   const todaysEntries = user.entries.filter((entry) => {
