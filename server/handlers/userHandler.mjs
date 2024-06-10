@@ -54,7 +54,7 @@ const addEntry = async (req, res) => {
 
 const getTodaysEntries = async (req, res) => {
   const user = req.user;
-  const {time} = req.body
+  const {time} = req.query
 
   if (!user) {
     return res.status(404).json({ message: "User not found." });
