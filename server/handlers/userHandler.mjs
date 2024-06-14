@@ -52,6 +52,29 @@ const addEntry = async (req, res) => {
   }
 };
 
+const addPastEntry = async (req, res) => {
+  const user = req.user;
+  const { mealName, proteinAmount, date, time } = req.body;
+
+  if (!mealName || !proteinAmount || !date || !time) {
+    return res.status(400).json({ message: "Missing information" });
+  }
+
+  try {
+    const entryDate = new Date(date + "T" + time);
+    entryDate.setHours(23, 59, 0, 0);
+    const newEntry = { mealName, proteinAmount, createdAt: entryDate };
+    user.entries.push(newEntry);
+    await user.save();
+    res.status(201).json(newEntry);
+  } catch (error) {
+    console.error("Error adding past entry:", error);
+    res
+      .status(500)
+      .json({ message: "Error adding past entry", error: error.message });
+  }
+};
+
 const getTodaysEntries = async (req, res) => {
   const user = req.user;
   const { time } = req.query;
@@ -89,7 +112,7 @@ const sumTodaysEntries = async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
-  
+
   const parsedTime = new Date(time);
 
   console.log("Parsed time:", parsedTime);
@@ -174,4 +197,5 @@ export default {
   sumTodaysEntries,
   deleteEntry,
   getAllPastEntries,
+  addPastEntry,
 };

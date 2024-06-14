@@ -10,6 +10,7 @@ const {
   sumTodaysEntries,
   deleteEntry,
   getAllPastEntries,
+  addPastEntry,
 } = UserHandlers;
 
 const router = express.Router();
@@ -23,5 +24,6 @@ router.get("/getTodaysEntries", getTodaysEntries);
 router.get("/sumTodaysEntries", sumTodaysEntries);
 router.delete("/deleteEntry/:entryId", deleteEntry);
 router.get("/getAllPastEntries", getAllPastEntries);
+router.post("/addPastEntry", addPastEntry);
 
 export default router;
